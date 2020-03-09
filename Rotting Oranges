@@ -1,0 +1,31 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        
+        q = []
+        freshOranges,numHours = 0,0
+        
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == 2:
+                    q.append([i,j,0])
+                if grid[i][j] == 1:
+                    freshOranges += 1
+        
+        if freshOranges == 0:
+            return 0
+        
+        while q:
+            row,col,hrs = q.pop(0)
+            
+            for dx,dy in [[0,1],[1,0],[0,-1],[-1,0]]:
+                if 0 <= row+dx < len(grid) and 0 <= col+dy < len(grid[0]):
+                    if grid[row+dx][col+dy] == 1:
+                        freshOranges -=1
+                        grid[row+dx][col+dy] = 2
+                        q.append([row+dx,col+dy,hrs+1])
+   
+        if freshOranges == 0:
+            return hrs
+        else:
+            return -1
+              
