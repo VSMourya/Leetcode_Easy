@@ -1,0 +1,19 @@
+class Solution:
+    def postorder(self, root: 'Node') -> List[int]:
+        
+        if not root:
+            return 
+        
+        ls = []
+        
+        def traverse(root):
+            
+            if root:    
+                for child in root.children:
+                    traverse(child)
+                    ls.append(child.val)
+                    
+        traverse(root)
+        ls += [root.val]
+        
+        return ls
