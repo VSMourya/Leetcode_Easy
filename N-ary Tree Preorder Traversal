@@ -1,0 +1,22 @@
+time - O(n)
+space - O(n)
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        
+        if not root:
+            return 
+            
+        ls = []
+                
+        def traverse(root):
+            
+            if root:
+                ls.append(root.val)        
+                for child in root.children:
+                    traverse(child)
+                    
+        traverse(root)
+        
+        return ls        
+        
